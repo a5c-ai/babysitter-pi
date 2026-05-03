@@ -22,10 +22,14 @@ jobs:
     if: ${{ !startsWith(github.ref, 'refs/tags/') }}
     runs-on: ubuntu-latest
     steps:
+      - name: Generate a5c GitHub App token
+        id: a5c-token
+        continue-on-error: true
+        uses: a5c-ai/generate-token-action@main
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.A5C_RELEASE_TOKEN || github.token }}
+          token: ${{ steps.a5c-token.outputs.a5c_token || github.token }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
