@@ -1,6 +1,6 @@
 {
   "name": "@a5c-ai/babysitter-pi",
-  "version": "5.0.1-staging.0f432b558a37",
+  "version": "5.0.1-staging.770f28f7b6fd",
   "type": "module",
   "description": "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval — Pi Coding Agent",
   "keywords": [
