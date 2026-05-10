@@ -1,4 +1,4 @@
-import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
+import type { ExtensionAPI, ExtensionContext } from "@mariozechner/pi-coding-agent";
 import { execSync } from "child_process";
 import * as path from "path";
 
@@ -24,6 +24,26 @@ const COMMANDS = [
 
 function toSkillPrompt(name: string, args: string): string {
   return `/skill:${name}${args ? ` ${args}` : ""}`;
+}
+
+function syncSessionEnvironment(ctx?: ExtensionContext): string | undefined {
+  const sessionId = ctx?.sessionManager.getSessionId();
+  if (sessionId) {
+    process.env.PI_SESSION_ID = sessionId;
+    process.env.BABYSITTER_SESSION_ID = sessionId;
+  }
+
+  process.env.PI_PLUGIN_ROOT = PLUGIN_ROOT;
+  return sessionId;
+}
+
+function sessionStartInput(ctx?: ExtensionContext): Record<string, unknown> {
+  const sessionId = syncSessionEnvironment(ctx);
+  return {
+    event: "session_start",
+    cwd: ctx?.cwd ?? process.cwd(),
+    ...(sessionId ? { session_id: sessionId } : {}),
+  };
 }
 
 /**
@@ -53,18 +73,21 @@ function runProxiedHook(
 }
 
 export default function activate(pi: ExtensionAPI): void {
-  // ---------------------------------------------------------------------------
-  // Trigger session-start hook on activation
-  // ---------------------------------------------------------------------------
-  runProxiedHook("babysitter-proxied-session-start.js", {
-    event: "session_start",
-    cwd: process.cwd(),
+  pi.on("session_start", async (_event, ctx) => {
+    runProxiedHook("babysitter-proxied-session-start.js", sessionStartInput(ctx));
   });
+
+  // ---------------------------------------------------------------------------
+  // Ensure package root is visible even before Pi emits session_start.
+  // The concrete session id is refreshed from session_start and command contexts.
+  // ---------------------------------------------------------------------------
+  syncSessionEnvironment();
 
   // ---------------------------------------------------------------------------
   // Register slash commands (unchanged from legacy)
   // ---------------------------------------------------------------------------
-  const forwardBabysit = async (args: unknown) => {
+  const forwardBabysit = async (args: unknown, ctx?: ExtensionContext) => {
+    syncSessionEnvironment(ctx);
     pi.sendUserMessage(toSkillPrompt("babysit", String(args ?? "").trim()));
   };
 
@@ -79,7 +102,8 @@ export default function activate(pi: ExtensionAPI): void {
   });
 
   for (const name of COMMANDS) {
-    const forward = async (args: unknown) => {
+    const forward = async (args: unknown, ctx?: ExtensionContext) => {
+      syncSessionEnvironment(ctx);
       pi.sendUserMessage(toSkillPrompt(name, String(args ?? "").trim()));
     };
 
