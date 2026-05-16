@@ -5,3 +5,7 @@ allowed-tools: Read, Grep, Write, Task, Bash, Edit, Grep, Glob, WebFetch, WebSea
 ---
 
 Invoke the babysitter:babysit skill (using the Skill tool) and follow its instructions (SKILL.md).
+
+User arguments for this command:
+
+$ARGUMENTS

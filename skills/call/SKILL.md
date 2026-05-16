@@ -6,3 +6,7 @@ description: Orchestrate a babysitter run. use this command to start babysitting
 # call
 
 Invoke the babysitter:babysit skill (using the Skill tool) and follow its instructions (SKILL.md).
+
+User arguments for this command:
+
+$ARGUMENTS

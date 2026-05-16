@@ -6,3 +6,7 @@ description: Orchestrate a babysitter run. use this command to start babysitting
 # yolo
 
 Invoke the babysitter:babysit skill (using the Skill tool) and follow its instructions (SKILL.md). but without any user interaction or breakpoints in the run.
+
+User arguments for this command:
+
+$ARGUMENTS
