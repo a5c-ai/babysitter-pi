@@ -10,7 +10,23 @@ This is a thin Pi package:
 
 ## Installation
 
-Recommended:
+Install the Babysitter CLI once when using the SDK helper:
+
+```bash
+npm install -g @a5c-ai/babysitter
+```
+
+Recommended for automation:
+
+```bash
+# Global install
+babysitter harness:install-plugin pi
+
+# Workspace install
+babysitter harness:install-plugin pi --workspace /path/to/repo
+```
+
+Native Pi package install:
 
 ```bash
 pi install npm:@a5c-ai/babysitter-pi
@@ -29,11 +45,11 @@ cd /path/to/repo
 pi install -l npm:@a5c-ai/babysitter-pi
 ```
 
-Development helper:
+Published package installer:
 
 ```bash
-npx @a5c-ai/babysitter-pi install
-npx @a5c-ai/babysitter-pi install --workspace /path/to/repo
+npx --yes @a5c-ai/babysitter-pi install --global
+npx --yes @a5c-ai/babysitter-pi install --workspace /path/to/repo
 ```
 
 Removal:
