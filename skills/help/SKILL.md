@@ -234,7 +234,8 @@ SECONDARY COMMANDS
   How it works: Runs npx @a5c-ai/babysitter-observer-dashboard@latest which watches
   the .a5c/runs/ directory (or a parent directory containing multiple projects) and
   serves a live dashboard. The process is blocking -- it runs until you stop it, and
-  it prints the local URL to share with the user.
+  it prints the local URL to share with the user. Do not use `babysitter observe`
+  as a fallback; the core Babysitter CLI does not expose that subcommand.
 
   Example: /babysitter:observe
   (opens browser showing all runs with live-updating task
