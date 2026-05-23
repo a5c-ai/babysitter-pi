@@ -13,5 +13,5 @@ Run the babysitter observer dashboard:
 
 Do not fall back to `babysitter observe`; the core Babysitter CLI does not expose
 that subcommand. Some harness runtimes may provide a separate
-`babysitter-agent observe` surface, but this skill uses the verified standalone
+`agent-platform observe` surface, but this skill uses the verified standalone
 dashboard package.
