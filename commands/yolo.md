@@ -4,7 +4,7 @@ argument-hint: Specific instructions for the run.
 allowed-tools: Read, Grep, Write, Task, Bash, Edit, Grep, Glob, WebFetch, WebSearch, Search, AskUserQuestion, TodoWrite, TodoRead, Skill, BashOutput, KillShell, MultiEdit, LS
 ---
 
-Start the Babysitter run directly through the CLI, without any user interaction or breakpoints. Do not invoke the Skill tool and do not run an instructions-only command. In Claude Code, use Bash to run `agent-platform yolo --harness claude-code --workspace "$PWD" --prompt "<user arguments>" --json`; in Codex, run `agent-platform yolo --harness codex --workspace "$PWD" --prompt "<user arguments>" --json`; in other harnesses, use the same command with that harness id. Replace `<user arguments>` with the arguments shown below, wait for the command to finish, and treat the CLI completion proof as the result.
+Run the Babysitter orchestration instructions directly through the CLI, without any user interaction or breakpoints. In Claude Code, use Bash to run `babysitter instructions:babysit-skill --harness claude-code --no-interactive`; in Codex, run `babysitter instructions:babysit-skill --harness codex --no-interactive`; in other harnesses, use the same command with that harness id. Then follow the returned instructions in this same turn until completion proof is produced. Do not stop after reading the instructions, do not invoke the Skill tool first, and use the non-interactive/no-breakpoints path when the instructions offer a mode choice.
 
 User arguments for this command:
 
