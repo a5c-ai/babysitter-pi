@@ -29,7 +29,7 @@ function writeFileIfChanged(filePath, contents) {
   try {
     const existing = fs.readFileSync(filePath, 'utf8');
     if (existing === contents) return false;
-  } catch {}
+  } catch (e) { process.stderr.write('[extension-mux] file read failed for ' + filePath + ', overwriting: ' + (e instanceof Error ? e.message : String(e)) + '\n'); }
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, contents);
   return true;
@@ -82,7 +82,7 @@ function writeJson(filePath, value) {
 function ensureExecutable(filePath) {
   try {
     fs.chmodSync(filePath, 0o755);
-  } catch {}
+  } catch (e) { process.stderr.write('[extension-mux] chmod failed for ' + filePath + ': ' + (e instanceof Error ? e.message : String(e)) + '\n'); }
 }
 
 function normalizeMarketplaceSourcePath(source, marketplacePath) {
@@ -104,7 +104,7 @@ function ensureMarketplaceEntry(marketplacePath, pluginRoot) {
     name: PLUGIN_NAME,
     source: relSource,
     description: "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval",
-    version: "5.0.1-staging.cdf798a9f097",
+    version: "5.0.1-staging.40a93c240e7b",
     author: { name: "a5c.ai" },
   };
   if (idx >= 0) marketplace.plugins[idx] = entry;
@@ -147,7 +147,7 @@ function resolveCliCommand(packageRoot) {
   const versionsPath = path.join(packageRoot, 'versions.json');
   const versions = readJson(versionsPath) || {};
   const ver = versions.sdkVersion || 'latest';
-  return `npx -y @a5c-ai/babysitter-sdk@${ver}`;
+  return `npm exec --yes --package @a5c-ai/babysitter-sdk@${ver} -- babysitter`;
 }
 
 function runCli(packageRoot, cliArgs, options = {}) {

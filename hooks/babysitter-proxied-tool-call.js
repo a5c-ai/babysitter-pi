@@ -6,7 +6,7 @@ var readFileSync = require("fs").readFileSync;
 
 var PLUGIN_ROOT = process.env.PI_PLUGIN_ROOT || process.env.PLUGIN_ROOT || path.resolve(__dirname, "..");
 var stdin = "";
-try { stdin = readFileSync(0, "utf8"); } catch {}
+try { stdin = readFileSync(0, "utf8"); } catch (e) { process.stderr.write("[extension-mux] stdin read failed: " + (e instanceof Error ? e.message : String(e)) + "\n"); }
 try {
   var result = execSync("bash " + JSON.stringify(path.join(PLUGIN_ROOT, "hooks/pre-tool-use.sh")), {
     input: stdin,
@@ -20,5 +20,7 @@ try {
   });
   process.stdout.write(result);
 } catch (e) {
-  process.stdout.write("{}\n");
+  process.stderr.write("[extension-mux] hook execution failed: " + (e instanceof Error ? e.message : String(e)) + "\n");
+  process.stdout.write(JSON.stringify({ error: e instanceof Error ? e.message : String(e) }) + "\n");
+  process.exit(1);
 }
