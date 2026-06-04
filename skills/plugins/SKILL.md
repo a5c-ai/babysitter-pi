@@ -21,4 +21,4 @@ babysitter blueprint:uninstall --plugin-name <name> [--marketplace-name <mp>] --
 
 The `--plugin-name` flag remains for CLI compatibility with existing marketplace manifests. Describe the installable as a blueprint in user-facing text.
 
-Agent harness plugins are not renamed. `CLAUDE_PLUGIN_ROOT`, `PI_PLUGIN_ROOT`, `.claude/plugins/`, hooks-mux, extension-mux, and agent plugin manifests remain plugin concepts.
+Agent harness plugins are not renamed. `CLAUDE_PLUGIN_ROOT`, `PI_PLUGIN_ROOT`, `.claude/plugins/`, hooks-adapter, extensions-adapter, and agent plugin manifests remain plugin concepts.

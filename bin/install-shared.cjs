@@ -29,7 +29,7 @@ function writeFileIfChanged(filePath, contents) {
   try {
     const existing = fs.readFileSync(filePath, 'utf8');
     if (existing === contents) return false;
-  } catch (e) { process.stderr.write('[extension-mux] file read failed for ' + filePath + ', overwriting: ' + (e instanceof Error ? e.message : String(e)) + '\n'); }
+  } catch (e) { process.stderr.write('[extensions-adapter] file read failed for ' + filePath + ', overwriting: ' + (e instanceof Error ? e.message : String(e)) + '\n'); }
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, contents);
   return true;
@@ -82,7 +82,7 @@ function writeJson(filePath, value) {
 function ensureExecutable(filePath) {
   try {
     fs.chmodSync(filePath, 0o755);
-  } catch (e) { process.stderr.write('[extension-mux] chmod failed for ' + filePath + ': ' + (e instanceof Error ? e.message : String(e)) + '\n'); }
+  } catch (e) { process.stderr.write('[extensions-adapter] chmod failed for ' + filePath + ': ' + (e instanceof Error ? e.message : String(e)) + '\n'); }
 }
 
 function normalizeMarketplaceSourcePath(source, marketplacePath) {
@@ -104,7 +104,7 @@ function ensureMarketplaceEntry(marketplacePath, pluginRoot) {
     name: PLUGIN_NAME,
     source: relSource,
     description: "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval",
-    version: "5.0.1-staging.3edc9d7b8d6f",
+    version: "5.1.1-staging.5ad08884fb61",
     author: { name: "a5c.ai" },
   };
   if (idx >= 0) marketplace.plugins[idx] = entry;
@@ -130,7 +130,7 @@ function runPostInstall(pluginRoot) {
   if (fs.existsSync(postInstall)) {
     spawnSync(process.execPath, [postInstall], {
       cwd: pluginRoot, stdio: 'inherit',
-      env: { ...process.env, PLUGIN_ROOT: pluginRoot },
+      env: { ...process.env, PLUGIN_ROOT: pluginRoot, CLAUDE_PLUGIN_ROOT: pluginRoot },
     });
   }
 }
