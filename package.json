@@ -1,6 +1,6 @@
 {
   "name": "@a5c-ai/babysitter-pi",
-  "version": "5.1.1-staging.ccb2b83425ef",
+  "version": "5.1.1-staging.f83d279f5d4c",
   "type": "module",
   "description": "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval — pi",
   "keywords": [
@@ -39,7 +39,8 @@
     "extensions/",
     "skills/",
     "commands/",
-    "scripts/"
+    "scripts/",
+    "hooks/"
   ],
   "author": "a5c.ai",
   "license": "MIT",
