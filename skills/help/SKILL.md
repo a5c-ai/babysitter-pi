@@ -180,13 +180,13 @@ SECONDARY COMMANDS
   a fuzzy comparison step before strict assertion. Implement this fix?")
 
 
-/babysitter:plugins [action]
-  Manage babysitter plugins: list installed plugins, browse marketplaces, install,
-  update, configure, uninstall, or create new plugins. Plugins are version-managed
-  instruction packages (not executable code) that guide the agent through install,
-  configure, and uninstall steps via markdown files.
+/babysitter:blueprints [action]
+  Manage Babysitter blueprints: list installed blueprints, browse marketplaces,
+  install, update, configure, uninstall, or create new blueprints. Blueprints are
+  version-managed instruction packages or process bundles that guide the agent
+  through install, configure, and uninstall steps.
 
-  Without arguments: shows installed plugins (name, version, marketplace, dates) and
+  Without arguments: shows installed blueprints (name, version, marketplace, dates) and
   available marketplaces. With arguments: routes to the specific action.
 
   Key actions:
@@ -194,11 +194,11 @@ SECONDARY COMMANDS
   - configure <name> --global|--project: fetch configure.md and walk through options
   - update <name> --global|--project: resolve migration chain via BFS and apply steps
   - uninstall <name> --global|--project: fetch uninstall.md and execute removal
-  - create: scaffold a new plugin package with the meta/plugin-creation process
+  - create: scaffold a new blueprint package
 
-  Example: /babysitter:plugins install sound-hooks --project
+  Example: /babysitter:blueprints install sound-hooks --project
   (fetches sound-hooks from marketplace, reads install.md, walks you through player
-  detection, sound selection, hook configuration, and registers in plugin-registry.json)
+  detection, sound selection, hook configuration, and registers the blueprint)
 
 
 /babysitter:contrib [feedback]
@@ -234,7 +234,8 @@ SECONDARY COMMANDS
   How it works: Runs npx @a5c-ai/babysitter-observer-dashboard@latest which watches
   the .a5c/runs/ directory (or a parent directory containing multiple projects) and
   serves a live dashboard. The process is blocking -- it runs until you stop it, and
-  it prints the local URL to share with the user.
+  it prints the local URL to share with the user. Do not use `babysitter observe`
+  as a fallback; the core Babysitter CLI does not expose that subcommand.
 
   Example: /babysitter:observe
   (opens browser showing all runs with live-updating task

@@ -157,7 +157,6 @@ If it exists:
 **Goal:** Inspect babysitter session files for health and detect runaway loops.
 
 - Search for session state files using Glob:
-  - `plugins/babysitter/skills/babysit/state/*.md`
   - `.a5c/state/*.md`
   - `.a5c/state/*.json`
 - For each session state file found:
@@ -261,7 +260,7 @@ Mark as PASS if total size < 500MB and no files > 10MB. Mark as WARN if total si
 
 ### 10a. Hook Registration
 
-- Locate the plugin root. Check for `CLAUDE_PLUGIN_ROOT` env var, or search for `plugins/babysitter/hooks/hooks.json` by walking up from the current directory.
+- Locate the plugin root. Check for `CLAUDE_PLUGIN_ROOT` env var first, or search for a babysitter `hooks.json` by walking up from the current directory.
 - If found, read `hooks.json` and verify:
   - A `Stop` hook entry exists with a command referencing `babysitter-stop-hook.sh`.
   - A `SessionStart` hook entry exists with a command referencing `babysitter-session-start-hook.sh`.
@@ -316,7 +315,7 @@ If the stop hook shows NO evidence of execution (no log entries, no journal even
 
 Perform these diagnostic steps in order and report the first failure found:
 
-1. **Plugin not installed**: Check if `plugins/babysitter/` exists relative to the project root and if `CLAUDE_PLUGIN_ROOT` is set. If the plugin directory doesn't exist, report: "Plugin not installed — the babysitter plugin directory is missing."
+1. **Plugin not installed**: Check if `CLAUDE_PLUGIN_ROOT` is set or if a babysitter plugin directory exists relative to the project root. If neither exists, report: "Plugin not installed — the babysitter plugin directory is missing."
 
 2. **Plugin not enabled**: Check for Claude settings files:
    - `~/.claude/settings.json` — look for `babysitter` in `enabledPlugins`.

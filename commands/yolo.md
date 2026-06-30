@@ -4,4 +4,8 @@ argument-hint: Specific instructions for the run.
 allowed-tools: Read, Grep, Write, Task, Bash, Edit, Grep, Glob, WebFetch, WebSearch, Search, AskUserQuestion, TodoWrite, TodoRead, Skill, BashOutput, KillShell, MultiEdit, LS
 ---
 
-Invoke the babysitter:babysit skill (using the Skill tool) and follow its instructions (SKILL.md). but without any user interaction or breakpoints in the run.
+Run the Babysitter orchestration instructions directly through the CLI, without any user interaction or breakpoints. Use Bash to run `babysitter instructions:babysit-skill --harness pi --no-interactive`, then follow the returned instructions in this same turn until completion proof is produced. Do not stop after reading the instructions, do not invoke the Skill tool first, and use the non-interactive/no-breakpoints path when the instructions offer a mode choice.
+
+User arguments for this command:
+
+$ARGUMENTS

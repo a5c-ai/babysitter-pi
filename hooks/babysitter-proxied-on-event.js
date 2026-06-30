@@ -8,7 +8,7 @@ var PLUGIN_ROOT = process.env.PI_PLUGIN_ROOT || process.env.PLUGIN_ROOT || path.
 var stdin = "";
 try { stdin = readFileSync(0, "utf8"); } catch (e) { process.stderr.write("[extensions-adapter] stdin read failed: " + (e instanceof Error ? e.message : String(e)) + "\n"); }
 try {
-  var result = execSync("bash " + JSON.stringify(path.join(PLUGIN_ROOT, "hooks/pre-tool-use.sh")), {
+  var result = execSync("bash " + JSON.stringify(path.join(PLUGIN_ROOT, "hooks/post-tool-use.sh")), {
     input: stdin,
     stdio: ["pipe", "pipe", "pipe"],
     timeout: 30000,

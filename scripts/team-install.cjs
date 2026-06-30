@@ -2,7 +2,7 @@
 'use strict';
 
 var path = require('path');
-var shared = require('../bin/install-shared');
+var shared = require('../bin/install-shared.cjs');
 
 var workspace = process.cwd();
 for (var i = 0; i < process.argv.length; i++) {
