@@ -1,6 +1,6 @@
 {
   "name": "@a5c-ai/babysitter-pi",
-  "version": "6.0.3-staging.19b1ae726d5f",
+  "version": "6.0.3-staging.43ceb5f9af17",
   "type": "module",
   "description": "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval — pi",
   "keywords": [

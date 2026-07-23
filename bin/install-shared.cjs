@@ -104,7 +104,7 @@ function ensureMarketplaceEntry(marketplacePath, pluginRoot) {
     name: PLUGIN_NAME,
     source: relSource,
     description: "Orchestrate complex, multi-step workflows with event-sourced state management, hook-based extensibility, and human-in-the-loop approval",
-    version: "6.0.3-staging.19b1ae726d5f",
+    version: "6.0.3-staging.43ceb5f9af17",
     author: { name: "a5c.ai" },
   };
   if (idx >= 0) marketplace.plugins[idx] = entry;
