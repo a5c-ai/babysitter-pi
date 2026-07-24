@@ -2,7 +2,7 @@
 'use strict';
 
 const path = require('path');
-const shared = require('./install-shared');
+const shared = require('./install-shared.cjs');
 
 const PACKAGE_ROOT = path.resolve(__dirname, '..');
 
