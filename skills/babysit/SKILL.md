@@ -22,6 +22,19 @@ or remove only the scratch data you created before returning.
 
 ## Dependencies
 
+### Pi session binding
+
+Fail closed before touching the Babysitter SDK if Pi did not bind a session:
+
+```bash
+if [ -z "${PI_SESSION_ID:-${BABYSITTER_SESSION_ID:-}}" ]; then
+  echo "Pi should provide PI_SESSION_ID when the Babysitter package is active." >&2
+  exit 2
+fi
+export PI_SESSION_ID="${PI_SESSION_ID:-$BABYSITTER_SESSION_ID}"
+export BABYSITTER_SESSION_ID="$PI_SESSION_ID"
+```
+
 ### Babysitter SDK and CLI
 
 Read the SDK version from `versions.json` to ensure version compatibility:
